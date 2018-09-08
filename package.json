@@ -1,6 +1,6 @@
 {
   "name": "react-movie-finder",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A React app for finding information about movies",
   "main": "index.js",
   "author": "Hadrian Hughes",
