@@ -13,6 +13,11 @@ module.exports = {
         },
       },
       {
+        test: /.css$/,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /.ttf$/,
         exclude: /node_modules/,
         use: {

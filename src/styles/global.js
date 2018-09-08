@@ -1,5 +1,6 @@
 import { injectGlobal } from 'styled-components';
 
+import './normalize.css';
 import { baseFontSize } from './settings';
 
 import FiraSans from '../fonts/FiraSans-Regular.ttf';
