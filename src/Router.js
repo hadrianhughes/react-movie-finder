@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import MainPage from './components/MainPage';
 
-const App = () => (
+const Router = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={MainPage} />
@@ -11,4 +11,4 @@ const App = () => (
   </BrowserRouter>
 );
 
-export default App;
+export default Router;
