@@ -1,5 +1,7 @@
 import { injectGlobal } from 'styled-components';
 
+import { baseFontSize } from './settings';
+
 import FiraSans from '../fonts/FiraSans-Regular.ttf';
 
 injectGlobal`
@@ -9,6 +11,8 @@ injectGlobal`
   }
 
   body {
+    font-family: 'Fira Sans';
+    font-size: ${baseFontSize}px;
     margin: 0;
     padding: 0;
   }
