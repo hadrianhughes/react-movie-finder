@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 
 import './styles/global';
 
-import Example from './components/Example';
+import Heading from './components/Heading';
 
-ReactDOM.render(<Example />, document.getElementById('root'));
+ReactDOM.render((
+  <React.Fragment>
+    <Heading>Movie Finder</Heading>
+  </React.Fragment>
+), document.getElementById('root'));
