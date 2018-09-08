@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Layout from '../Layout';
-import Input from '../Input';
+import Search from '../../containers/Search';
 
 const Main = () => (
   <Layout>
-    <Input />
+    <Search />
   </Layout>
 );
 
