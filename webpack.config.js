@@ -23,4 +23,5 @@ module.exports = {
       { from: 'static' }
     ]),
   ],
+  mode: 'development',
 };
