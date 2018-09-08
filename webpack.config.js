@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -10,11 +11,16 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         },
-      }
-    ]
+      },
+    ],
   },
   output: {
     path: path.join(__dirname, '/build'),
-    filename: 'bundle.js'
-  }
+    filename: 'bundle.js',
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: 'static' }
+    ]),
+  ],
 };
