@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Wrapper, Item, StyledImg } from './styles';
+import { Wrapper, Item, StyledImg, StyledButton } from './styles';
 
 const ResultsList = ({ items }) => (
   <Wrapper>
-    {
-      items.map(item => (
-        <Item key={item.imdbID}>
-          <StyledImg src={item.Poster} alt={item.Title} />
-          <h3>{item.Title} ({item.Year})</h3>
-        </Item>
-      ))
-    }
+    <div>
+      {
+        items.map(item => (
+          <Item key={item.imdbID}>
+            <StyledImg src={item.Poster} alt={item.Title} />
+            <h3>{item.Title} ({item.Year})</h3>
+          </Item>
+        ))
+      }
+    </div>
+    <StyledButton>Load more</StyledButton>
   </Wrapper>
 );
 

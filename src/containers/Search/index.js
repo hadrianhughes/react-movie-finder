@@ -11,6 +11,7 @@ class Search extends React.Component {
     this.state = {
       value: '',
       results: [],
+      page: 1,
     };
 
     this.handleChange = this.handleChange.bind(this);

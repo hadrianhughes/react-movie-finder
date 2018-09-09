@@ -2,7 +2,10 @@ export const layoutMaxWidth = 1000;
 export const baseFontSize = 16;
 
 export const colors = {
-  greyBorder: '#a9a9a9',
+  'greyBorder': '#a9a9a9',
+  'primary': '#61dafb',
+  'primary--semiDark': '#3ecef2',
+  'primary--dark': '#34bfe2',
 };
 
 export const fontMultipliers = {
