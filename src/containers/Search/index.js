@@ -2,6 +2,7 @@ import React from 'react';
 import { debounce } from 'throttle-debounce';
 
 import Input from '../../components/Input';
+import ResultsList from '../../components/ResultsList';
 
 class Search extends React.Component {
   constructor (props) {
@@ -9,6 +10,7 @@ class Search extends React.Component {
 
     this.state = {
       value: '',
+      results: [],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,17 +26,27 @@ class Search extends React.Component {
   fetchResults () {
     fetch(`http://www.omdbapi.com/?apikey=8eff793c&s=${this.state.value}`)
       .then(response => response.json())
-      .then(response => console.log(response))
+      .then(response => {
+        this.setState({
+          results: response.Response === 'True' ?
+            response.Search.filter(item => item.Poster && item.Poster !== 'N/A')
+            :
+            []
+        });
+      })
       .catch(err => console.error(err));
   }
 
   render () {
     return (
-      <Input
-        onChange={this.handleChange}
-        placeholder="Search for a movie..."
-        value={this.state.value}
-      />
+      <div>
+        <Input
+          onChange={this.handleChange}
+          placeholder="Search for a movie..."
+          value={this.state.value}
+        />
+        <ResultsList items={this.state.results} />
+      </div>
     );
   }
 }

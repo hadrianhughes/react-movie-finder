@@ -15,4 +15,9 @@ module.exports = {
     browser: true,
     node: true,
   },
+  rules: {
+    'no-console': {
+      allow: ['warn', 'error', 'info'],
+    },
+  },
 };

@@ -5,6 +5,7 @@ import { rem, fontSize, spacing } from '../../styles/tools';
 
 export const Wrapper = styled.div`
   padding: ${spacing('small')};
+  padding-bottom: ${spacing('medium')};
 `;
 
 export const StyledInput = styled.input`
