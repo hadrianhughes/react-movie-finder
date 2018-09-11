@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Wrapper, Item, StyledImg, StyledButton } from './styles';
+import { Wrapper, Item, StyledImg } from './styles';
+import Button from '../Button';
 
-const ResultsList = ({ items }) => (
+const ResultsList = ({ items, hasMoreResults, onLoadMore }) => (
   <Wrapper>
     <div>
       {
@@ -15,16 +16,22 @@ const ResultsList = ({ items }) => (
         ))
       }
     </div>
-    <StyledButton>Load more</StyledButton>
+    {
+      hasMoreResults && <Button text="Load more" onClick={onLoadMore} />
+    }
   </Wrapper>
 );
 
 ResultsList.propTypes = {
   items: PropTypes.array,
+  hasMoreResults: PropTypes.bool,
+  onLoadMore: PropTypes.func,
 };
 
 ResultsList.defaultProps = {
   items: [],
+  hasMoreResults: false,
+  onLoadMore: () => {},
 };
 
 export default ResultsList;
