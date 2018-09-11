@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import { spacing, color } from '../../styles/tools';
+import { spacing, color, breakpoint } from '../../styles/tools';
 import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
@@ -19,7 +19,11 @@ export const Item = styled.div`
   display: inline-block;
   padding: 0 ${spacing('small')} ${spacing('small')};
   vertical-align: top;
-  width: 33.3333%;
+  width: 50%;
+
+  @media only screen and (min-width: ${breakpoint('medium')}) {
+    width: 33.3333%;
+  }
 `;
 
 export const ItemLink = styled(Link)`

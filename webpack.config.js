@@ -3,6 +3,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
+  devServer: {
+    historyApiFallback: true,
+  },
   entry: './src/index.js',
   module: {
     rules: [

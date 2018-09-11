@@ -20,3 +20,7 @@ export const spacings = {
   medium: 20,
   large: 40,
 };
+
+export const breakpoints = {
+  medium: 768,
+};
