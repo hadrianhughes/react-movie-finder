@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Wrapper, Item, StyledImg } from './styles';
+import { Wrapper, Item, StyledImg, ItemLink as Link } from './styles';
 import Button from '../Button';
 
 const ResultsList = ({ items, hasMoreResults, onLoadMore }) => (
@@ -10,8 +10,10 @@ const ResultsList = ({ items, hasMoreResults, onLoadMore }) => (
       {
         items.map(item => (
           <Item key={item.imdbID}>
-            <StyledImg src={item.Poster} alt={item.Title} />
-            <h3>{item.Title} ({item.Year})</h3>
+            <Link to={`/movie/${item.imdbID}`}>
+              <StyledImg src={item.Poster} alt={item.Title} />
+              <h3>{item.Title} ({item.Year})</h3>
+            </Link>
           </Item>
         ))
       }

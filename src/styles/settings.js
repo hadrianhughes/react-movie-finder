@@ -6,6 +6,7 @@ export const colors = {
   'primary': '#61dafb',
   'primary--semiDark': '#3ecef2',
   'primary--dark': '#34bfe2',
+  'black': '#000',
 };
 
 export const fontMultipliers = {
