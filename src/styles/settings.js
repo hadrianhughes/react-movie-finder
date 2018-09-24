@@ -13,6 +13,7 @@ export const fontMultipliers = {
   small: 1,
   medium: 1.5,
   large: 2,
+  xlarge: 3,
 };
 
 export const spacings = {
