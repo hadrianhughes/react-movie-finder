@@ -1,5 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { debounce } from 'throttle-debounce';
+
+import setMovies from '../../actions/setMovies';
+import setHasMore from '../../actions/setHasMore';
+import setPage from '../../actions/setPage';
+import setSearchQuery from '../../actions/setSearchQuery';
 
 import Input from '../../components/Input';
 import ResultsList from '../../components/ResultsList';
@@ -7,13 +14,6 @@ import ResultsList from '../../components/ResultsList';
 class Search extends React.Component {
   constructor (props) {
     super(props);
-
-    this.state = {
-      value: '',
-      results: [],
-      page: 1,
-      hasMoreResults: false,
-    };
 
     this.handleChange = this.handleChange.bind(this);
     this.newSearchDebounced = debounce(500, this.newSearch);
@@ -30,39 +30,36 @@ class Search extends React.Component {
   }
 
   handleChange (e) {
-    this.setState({ value: e.target.value }, () => {
-      this.newSearchDebounced();
-    });
+    this.props.setSearchQuery(e.target.value);
+    this.newSearchDebounced();
   }
 
   newSearch () {
-    Search.fetchResults(this.state.value)
+    Search.fetchResults(this.props.query)
       .then((response) => {
         const results = response.Search.filter(item => item.Poster && item.Poster !== 'N/A');
-        this.setState(response.Response === 'True' ? {
-          results,
-          hasMoreResults: this.state.results.length + results.length < response.totalResults,
-          page: 1,
-        } : {
-          results: [],
-          hasMoreResults: false,
-          page: 1,
-        });
+        this.props.setMovies(response.Response === 'True' ? results : []);
+        this.props.setHasMore(
+          response.Response === 'True' ? (
+            this.props.movies.length + results.length < response.totalResults
+          ) : false);
+        this.props.setPage(this.props.page + 1);
       })
       .catch(err => console.error(err));
   }
 
   loadMore () {
-    Search.fetchResults(this.state.value, this.state.page + 1)
+
+    Search.fetchResults(this.props.query, this.props.page + 1)
       .then((response) => {
         const results = response.Search.filter(item => item.Poster && item.Poster !== 'N/A');
-        this.setState(response.Response === 'True' ? {
-          results: this.state.results.concat(results),
-          hasMoreResults: this.state.results.length + results.length < response.totalResults,
-          page: this.state.page + 1,
-        } : {
-          hasMoreResults: false,
-        });
+        if (response.Response === 'True') {
+          this.props.setMovies(this.props.movies.concat(results));
+          this.props.setPage(this.props.page + 1);
+          this.props.setHasMore(this.props.movies.length + results.length < response.totalResults);
+        } else {
+          this.props.setHasMore(false);
+        }
       })
       .catch(err => console.error(err));
   }
@@ -73,11 +70,11 @@ class Search extends React.Component {
         <Input
           onChange={this.handleChange}
           placeholder="Search for a movie..."
-          value={this.state.value}
+          value={this.props.query}
         />
         <ResultsList
-          items={this.state.results}
-          hasMoreResults={this.state.hasMoreResults}
+          items={this.props.movies}
+          hasMoreResults={this.props.hasMoreResults}
           onLoadMore={this.loadMore}
         />
       </div>
@@ -85,4 +82,38 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+Search.propTypes = {
+  movies: PropTypes.array,
+  hasMoreResults: PropTypes.bool,
+  page: PropTypes.number,
+  query: PropTypes.string,
+  setMovies: PropTypes.func,
+  setHasMore: PropTypes.func,
+  setPage: PropTypes.func,
+};
+
+Search.defaultProps = {
+  movies: [],
+  hasMoreResults: true,
+  page: 1,
+  query: '',
+  setMovies: () => {},
+  setHasMore: () => {},
+  setPage: () => {},
+};
+
+const mapStateToProps = state => ({
+  movies: state.setMovies,
+  hasMoreResults: state.setHasMore,
+  page: state.setPage,
+  query: state.setSearchQuery,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setMovies: movies => dispatch(setMovies(movies)),
+  setHasMore: hasMore => dispatch(setHasMore(hasMore)),
+  setPage: page => dispatch(setPage(page)),
+  setSearchQuery: value => dispatch(setSearchQuery(value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
