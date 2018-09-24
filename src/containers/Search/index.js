@@ -54,7 +54,6 @@ class Search extends React.Component {
   }
 
   loadMore () {
-
     Search.fetchResults(this.props.query, this.props.page + 1)
       .then((response) => {
         const results = response.Search.filter(item => item.Poster && item.Poster !== 'N/A');
