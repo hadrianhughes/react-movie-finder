@@ -71,7 +71,7 @@ class Search extends React.Component {
 
   render () {
     return (
-      <div>
+      <>
         <Input
           onChange={this.handleChange}
           placeholder="Search for a movie..."
@@ -82,7 +82,7 @@ class Search extends React.Component {
           hasMoreResults={this.props.hasMoreResults}
           onLoadMore={this.loadMore}
         />
-      </div>
+      </>
     );
   }
 }
