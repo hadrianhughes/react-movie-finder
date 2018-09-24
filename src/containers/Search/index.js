@@ -29,6 +29,11 @@ class Search extends React.Component {
     });
   }
 
+  static trimResults (results) {
+    const remainder = results.length % 3;
+    return remainder > 0 ? results.slice(0, results.length - remainder) : results;
+  }
+
   handleChange (e) {
     this.props.setSearchQuery(e.target.value);
     this.newSearchDebounced();
@@ -73,7 +78,7 @@ class Search extends React.Component {
           value={this.props.query}
         />
         <ResultsList
-          items={this.props.movies}
+          items={Search.trimResults(this.props.movies)}
           hasMoreResults={this.props.hasMoreResults}
           onLoadMore={this.loadMore}
         />
