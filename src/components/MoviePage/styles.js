@@ -9,6 +9,10 @@ export const Back = styled(Link)`
   font-size: ${fontSize('medium')};
   padding-bottom: ${spacing('small')};
   text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const Poster = styled.img`
@@ -48,4 +52,5 @@ export const Rating = styled.p`
   )}
   font-size: ${fontSize('xlarge')};
   font-weight: bold;
+  padding-left: ${spacing('medium')};
 `;
